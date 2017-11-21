@@ -3,6 +3,9 @@ $(document).ready(function(){
     var i = 0; // set count to 0
     var ms = 3000; // milliseconds
     
+    // set the chat window to bottom
+    var scrollBottom = $(window).scrollTop() + $(window).height();
+    
     // when the page loads, hide all elements with class .msg
     $(".msg").hide();
     
@@ -104,6 +107,8 @@ $(document).ready(function(){
         showEllipsis();
         
         $("#"+num).show();
+        
+        $("#messages").animate({ scrollTop: scrollBottom }, "fast");
 
     }
     
@@ -117,9 +122,15 @@ $(document).ready(function(){
     // when user hits "Enter" run the submitComment function    
     
     $("#textbox").keypress(function (e) {
-        if (e.which == 13) {
-           submitComment();
+        if (e.keyCode != 13) return;
+        var txt = $("#textbox").val().replace(/\n/g, "");
+        
+        if (e.keyCode == 13){
+            submitComment();
         }
+        
+        return false;
+        
     });
     
     // this function posts a new comment to the page and triggers the correct block to load
@@ -130,6 +141,7 @@ $(document).ready(function(){
         
         $("#u"+i).text(txt);
         $("#textbox").val("");
+        $("#messages").animate({ scrollTop: scrollBottom }, "fast");
         
         checkNext();
     }
