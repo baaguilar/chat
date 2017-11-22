@@ -94,10 +94,24 @@ $(document).ready(function(){
         setTimeout(
                 function(){
                     msg(11); // eleventh
-                    $("#ellipsis").hide();
-            },ms*3);
+                },ms*3);
         
+        setTimeout(
+                function(){
+                    msg(12); // twelfth
+                    $("#ellipsis").hide();
+            },ms*4);
     }
+    
+     function fifthBlock(){
+        console.log('fifth block ...');
+        
+        showEllipsis();
+           
+        setTimeout(
+                function(){msg(13); // ninth message
+            },ms);
+     }
     
     // function to load next message
     function msg(num){
@@ -133,6 +147,7 @@ $(document).ready(function(){
         
     });
     
+   
     // this function posts a new comment to the page and triggers the correct block to load
     function submitComment(){
         i++; // increment "i" by +1
@@ -146,7 +161,7 @@ $(document).ready(function(){
         checkNext();
     }
 
-    // check what block to send next
+    // check what block to send out next
     function checkNext(){
         
         //how many User messages are visible? 
@@ -159,6 +174,8 @@ $(document).ready(function(){
             thirdBlock();
         } else if (msgcount == 3){ // if three
             fourthBlock();
+        } else if (msgcount == 4){
+            fifthBlock();
         }
     }
 });
