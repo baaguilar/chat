@@ -151,10 +151,19 @@ $(document).ready(function(){
     // this function posts a new comment to the page and triggers the correct block to load
     function submitComment(){
         i++; // increment "i" by +1
+        
+        // append a new container with thumbnail, etc.
         $("<div>",{class:"msg user",id:"u"+i}).appendTo("#messages");
+        $("<div>",{class:"purple"}).appendTo("#u"+i);
+        alert('doing ...');
+        $("<img>",{class:"left"}).appendTo("#u"+i+ " .purple");
+        
+        // get the text typed into the input box
         var txt = $("#textbox").val();
         
-        $("#u"+i).text(txt);
+        // append the typed text into the new post
+        $( "#u"+i+ " .purple" ).append( txt );
+        
         $("#textbox").val("");
         $("#messages").animate({ scrollTop: scrollBottom }, "fast");
         
